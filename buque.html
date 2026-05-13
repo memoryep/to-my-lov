@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Buquê Para Você ❤️</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            overflow: hidden;
+            height: 100vh;
+
+            background:
+                radial-gradient(circle at 20% 20%, rgba(255,255,255,.18), transparent 25%),
+                radial-gradient(circle at 80% 30%, rgba(255,255,255,.12), transparent 25%),
+                radial-gradient(circle at 50% 0%, rgba(255,180,220,.35), transparent 35%),
+                linear-gradient(
+                    180deg,
+                    #ff7eb3 0%,
+                    #e0005a 35%,
+                    #9a0036 70%,
+                    #4a0018 100%
+                );
+
+            background-size: 200% 200%;
+            animation: bgMove 14s ease infinite;
+        }
+
+        @keyframes bgMove {
+
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* FUNDO */
+        .bg {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(255, 190, 220, .55);
+            animation: float linear infinite;
+        }
+
+        @keyframes float {
+            from {
+                transform: translateY(0) scale(.8);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            to {
+                transform: translateY(-120vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .spark {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 0 12px white;
+            animation: blink 2s infinite alternate;
+        }
+
+        @keyframes blink {
+            from {
+                opacity: .2;
+                transform: scale(.7);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1.7);
+            }
+        }
+
+        /* TEXTO */
+        .text {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(90vw, 1500px);
+            text-align: center;
+            color: white;
+            z-index: 20;
+            padding: 0 30px;
+
+            animation: fade 2s ease forwards;
+        }
+
+        .text h1 {
+            font-size: clamp(2rem, 5vw, 5rem);
+            line-height: 1.1;
+            font-weight: 800;
+
+            text-shadow:
+                0 0 12px white,
+                0 0 30px #ff5c8a,
+                0 0 60px #ff0054;
+        }
+
+        @keyframes fade {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        /* CENA */
+        .scene {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+
+            animation: zoom 8s ease forwards;
+        }
+
+        @keyframes zoom {
+            from {
+                transform: scale(.82);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+
+        /* BUQUE */
+        .bouquet {
+            position: relative;
+            width: min(1200px, 96vw);
+            height: 720px;
+            transform: scale(.88);
+            margin-bottom: -80px;
+        }
+
+        /* CAULE */
+        .stem {
+            position: absolute;
+            left: 50%;
+            bottom: 100px;
+
+            width: 8px;
+            border-radius: 999px;
+
+            background:
+                linear-gradient(to bottom,
+                    #58d66c,
+                    #146b2a);
+
+            transform-origin: bottom center;
+
+            animation: grow 1s forwards;
+
+            z-index: 1;
+        }
+
+        @keyframes grow {
+            from {
+                height: 0;
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* FOLHAS */
+        .leaf {
+            position: absolute;
+
+            width: 70px;
+            height: 28px;
+
+            border-radius: 100% 0 100% 0;
+
+            background:
+                linear-gradient(to right,
+                    #7be495,
+                    #147c32);
+
+            z-index: 2;
+
+            animation: leafIn 1s forwards;
+            opacity: 0;
+        }
+
+        @keyframes leafIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* FLORES */
+        .flower {
+            position: absolute;
+
+            transform:
+                translate(-50%, -50%) scale(0);
+
+            animation:
+                bloom .9s cubic-bezier(.2, 1.5, .4, 1) forwards;
+
+            z-index: 10;
+        }
+
+        @keyframes bloom {
+            to {
+                transform:
+                    translate(-50%, -50%) scale(1);
+            }
+        }
+
+        .petal {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+
+            border-radius: 70% 70% 20% 70%;
+        }
+
+        .center {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+
+            transform: translate(-50%, -50%);
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(circle,
+                    #7a3b00,
+                    #2b1200);
+
+            z-index: 12;
+        }
+
+        /* LAÇO */
+        .ribbon {
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+
+            transform:
+                translateX(-50%) scale(0);
+
+            width: 300px;
+            height: 180px;
+
+            z-index: 30;
+
+            animation:
+                ribbon 1s 3.5s forwards;
+        }
+
+        @keyframes ribbon {
+            to {
+                transform:
+                    translateX(-50%) scale(1);
+            }
+        }
+
+        .side {
+            position: absolute;
+            width: 140px;
+            height: 100px;
+
+            background:
+                radial-gradient(circle at 30% 30%,
+                    #ff6fa7,
+                    #c7004c);
+
+            box-shadow:
+                0 0 25px rgba(255, 0, 84, .7);
+        }
+
+        .left {
+            left: 0;
+            border-radius: 80% 20% 80% 20%;
+            transform: rotate(18deg);
+        }
+
+        .right {
+            right: 0;
+            border-radius: 20% 80% 20% 80%;
+            transform: rotate(-18deg);
+        }
+
+        .knot {
+            position: absolute;
+            left: 50%;
+            top: 32px;
+
+            transform: translateX(-50%);
+
+            width: 65px;
+            height: 65px;
+
+            border-radius: 50%;
+            background: #ff0054;
+        }
+
+        @media(max-width:768px) {
+
+            .bouquet {
+                transform: scale(.65);
+            }
+
+            .text h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg" id="bg"></div>
+
+    <div class="text">
+        <h1>
+            Esse buquê é só uma pequena parte do carinho enorme que eu sinto por você ❤️
+        </h1>
+    </div>
+
+    <div class="scene">
+
+        <div class="bouquet" id="bouquet"></div>
+
+    </div>
+
+    <script>
+
+        const bg = document.getElementById("bg");
+        const bouquet = document.getElementById("bouquet");
+
+        /* CORAÇÕES */
+        function createHeart() {
+
+            const heart = document.createElement("div");
+
+            heart.className = "heart";
+
+            heart.innerHTML = "❤";
+
+            heart.style.left =
+                Math.random() * 100 + "vw";
+
+            heart.style.fontSize =
+                (20 + Math.random() * 55) + "px";
+
+            heart.style.animationDuration =
+                (7 + Math.random() * 7) + "s";
+
+            bg.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 15000);
+        }
+
+        setInterval(createHeart, 220);
+
+        /* BRILHOS */
+        for (let i = 0; i < 100; i++) {
+
+            const spark =
+                document.createElement("div");
+
+            spark.className = "spark";
+
+            spark.style.left =
+                Math.random() * 100 + "vw";
+
+            spark.style.top =
+                Math.random() * 100 + "vh";
+
+            spark.style.animationDelay =
+                Math.random() * 3 + "s";
+
+            bg.appendChild(spark);
+        }
+
+        /* FLORES */
+        const flowers = [
+
+            { x: 50, y: 8, s: 110, c: 0 },
+            { x: 40, y: 12, s: 100, c: 1 },
+            { x: 60, y: 12, s: 100, c: 2 },
+
+            { x: 32, y: 20, s: 110, c: 0 },
+            { x: 45, y: 22, s: 120, c: 1 },
+            { x: 58, y: 22, s: 120, c: 2 },
+            { x: 70, y: 20, s: 110, c: 0 },
+
+            { x: 24, y: 32, s: 105, c: 1 },
+            { x: 38, y: 34, s: 115, c: 2 },
+            { x: 50, y: 36, s: 130, c: 0 },
+            { x: 62, y: 34, s: 115, c: 1 },
+            { x: 76, y: 32, s: 105, c: 2 },
+
+            { x: 18, y: 46, s: 100, c: 0 },
+            { x: 30, y: 48, s: 110, c: 1 },
+            { x: 42, y: 50, s: 120, c: 2 },
+            { x: 56, y: 50, s: 120, c: 0 },
+            { x: 68, y: 48, s: 110, c: 1 },
+            { x: 82, y: 46, s: 100, c: 2 },
+
+            { x: 24, y: 62, s: 95, c: 1 },
+            { x: 38, y: 64, s: 105, c: 2 },
+            { x: 50, y: 66, s: 115, c: 0 },
+            { x: 62, y: 64, s: 105, c: 1 },
+            { x: 76, y: 62, s: 95, c: 2 }
+        ];
+
+        const palettes = [
+
+            ["#ffd60a", "#ffea61"],
+            ["#ff4d8d", "#ff9ec0"],
+            ["#b86dff", "#e0b8ff"]
+
+        ];
+
+        flowers.forEach((flower, i) => {
+
+            const stem =
+                document.createElement("div");
+
+            stem.className = "stem";
+
+            const rotate =
+                (flower.x - 50) * .8;
+
+            const height =
+                320 + (70 - flower.y) * 3;
+
+            stem.style.height =
+                height + "px";
+
+            stem.style.transform =
+                `translateX(-50%) rotate(${rotate}deg)`;
+
+            stem.style.animationDelay =
+                `${i * .05}s`;
+
+            bouquet.appendChild(stem);
+        });
+
+        for (let i = 0; i < 60; i++) {
+
+            const leaf =
+                document.createElement("div");
+
+            leaf.className = "leaf";
+
+            const side =
+                i % 2 === 0 ? -1 : 1;
+
+            leaf.style.left =
+                `calc(50% + ${side * (30 + Math.random() * 180)}px)`;
+
+            leaf.style.bottom =
+                `${120 + Math.random() * 220}px`;
+
+            leaf.style.transform =
+                `rotate(${side * (20 + Math.random() * 60)}deg)`;
+
+            leaf.style.animationDelay =
+                `${1 + i * .03}s`;
+
+            bouquet.appendChild(leaf);
+        }
+
+        flowers.forEach((flower, i) => {
+
+            const div =
+                document.createElement("div");
+
+            div.className = "flower";
+
+            div.style.left =
+                flower.x + "%";
+
+            div.style.top =
+                flower.y + "%";
+
+            div.style.width =
+                flower.s + "px";
+
+            div.style.height =
+                flower.s + "px";
+
+            div.style.animationDelay =
+                `${.5 + i * .05}s`;
+
+            const palette =
+                palettes[flower.c];
+
+            for (let p = 0; p < 14; p++) {
+
+                const petal =
+                    document.createElement("div");
+
+                petal.className = "petal";
+
+                petal.style.width =
+                    flower.s * .42 + "px";
+
+                petal.style.height =
+                    flower.s * .42 + "px";
+
+                petal.style.background =
+                    `radial-gradient(circle at 30% 30%, ${palette[1]}, ${palette[0]})`;
+
+                petal.style.transform =
+                    `translate(-50%,-50%) rotate(${p * 25.7}deg) translateY(-${flower.s * .28}px)`;
+
+                div.appendChild(petal);
+            }
+
+            const center =
+                document.createElement("div");
+
+            center.className = "center";
+
+            center.style.width =
+                flower.s * .22 + "px";
+
+            center.style.height =
+                flower.s * .22 + "px";
+
+            div.appendChild(center);
+
+            bouquet.appendChild(div);
+        });
+
+        const ribbon =
+            document.createElement("div");
+
+        ribbon.className = "ribbon";
+
+        ribbon.innerHTML = `
+        
+        <div class="side left"></div>
+        <div class="side right"></div>
+        <div class="knot"></div>
+        
+        `;
+
+        bouquet.appendChild(ribbon);
+
+    </script>
+
+</body>
+
+</html>

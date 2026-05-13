@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="icon.png">
     <title>Para o Amor da Minha Vida</title>
+    
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -297,7 +299,94 @@
             color: #ffd1e8;
         }
 
- 
+        .varal-fotos {
+            display: none;
+            margin-top: 50px;
+            animation: aparecer 1s ease;
+        }
+
+        .varal-fotos h3 {
+            color: #ffb6dc;
+            margin-bottom: 25px;
+        }
+
+        .corda {
+            width: 100%;
+            height: 3px;
+            background: rgba(255, 214, 246, 0.6);
+            margin-bottom: -18px;
+            box-shadow: 0 0 12px rgba(255, 182, 220, 0.5);
+        }
+
+        .fotos {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .foto-polaroid {
+            position: relative;
+            width: 170px;
+            background: #fff;
+            padding: 10px 10px 18px;
+            border-radius: 6px;
+            color: #7a0030;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+            animation: balancar 3s ease-in-out infinite;
+            transform-origin: top center;
+        }
+
+        .foto-polaroid:nth-child(2) {
+            animation-delay: .4s;
+            transform: rotate(2deg);
+        }
+
+        .foto-polaroid:nth-child(3) {
+            animation-delay: .8s;
+            transform: rotate(-2deg);
+        }
+
+        .foto-polaroid img {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .foto-polaroid p {
+            margin-top: 10px;
+            font-size: .9rem;
+            text-align: center;
+            color: #7a0030;
+            font-weight: bold;
+        }
+
+        .pregador {
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 18px;
+            height: 32px;
+            background: #ffd1e8;
+            border-radius: 5px;
+            box-shadow: 0 0 8px rgba(255, 255, 255, .5);
+        }
+
+        @keyframes balancar {
+
+            0%,
+            100% {
+                transform: rotate(-2deg);
+            }
+
+            50% {
+                transform: rotate(2deg);
+            }
+        }
+
+
         @media(max-width:768px) {
 
             .hero h1 {
@@ -352,10 +441,51 @@
                 <div id="contadorAniversario"></div>
 
                 <p id="fraseEspecial"></p>
+                <br><br>
 
-                <button class="btn-surpresa" onclick="abrirCarta()">
-                    Abrir surpresa 💌
-                </button>
+                <div style="display:flex; flex-direction:column; gap:15px; align-items:center; margin-top:25px;">
+
+                    <button class="btn-surpresa" onclick="window.location.href='buque.html'">
+                        Abrir meu buquê 🌻🌹
+                    </button>
+
+                    <button class="btn-surpresa" onclick="abrirVaral()">
+                        Abrir nossas fotos 📸
+                    </button>
+                    
+                </div>
+            
+
+                <div class="varal-fotos" id="varalFotos">
+                    <h3>Algumas memórias nossas ❤️</h3>
+
+                    <div class="corda"></div>
+
+                    <div class="fotos">
+                        <div class="foto-polaroid">
+                            <span class="pregador"></span>
+                            <img src="foto1.jpg" alt="Nossa foto 1">
+                            <p>Nosso momento</p>
+                        </div>
+
+                        <div class="foto-polaroid">
+                            <span class="pregador"></span>
+                            <img src="foto2.jpg" alt="Nossa foto 2">
+                            <p>Eu amo você</p>
+                        </div>
+
+                        <div class="foto-polaroid">
+                            <span class="pregador"></span>
+                            <img src="foto3.jpg" alt="Nossa foto 3">
+                            <p>Pra sempre nós</p>
+                        </div>
+                    </div>
+                     <button class="btn-surpresa" onclick="abrirCarta()">
+                        Ler minha carta 💌
+                    </button>
+
+                   
+                </div>
 
                 <div class="carta" id="carta">
                     <h3>Feliz aniversário, meu amor ❤️</h3>
@@ -364,7 +494,6 @@
                         Hoje é um dia muito especial, porque é o aniversário da pessoa que eu mais amo nesse mundo.
                         E nesse dia, eu só quero te lembrar o quanto você é importante para mim.
                         <br><br>
-
                         Quero construir momentos bons ao seu lado,
                         te acompanhar em cada fase da sua vida e continuar fazendo parte da sua história.
                         Porque, sinceramente, é você quem eu quero comigo no presente e no futuro.
@@ -384,12 +513,13 @@
                         realizados e muitos motivos para sorrir.
                         <br><br>
                         Obrigado por continuar ao meu lado e por ser alguém tão especial para mim. Eu te amo muito e
-                        quero continuar vivendo muitos momentos com você. Feliz aniversário, meu amor. <strong>I LOVE YOU FOREVER!!!</strong>
+                        quero continuar vivendo muitos momentos com você. Feliz aniversário, meu amor. <strong>I LOVE
+                            YOU FOREVER!!!</strong>
                         <br><br>
 
                     </p>
                 </div>
-               
+
                 <div class="counter" id="contador"></div>
             </div>
 
@@ -516,7 +646,7 @@
         <h2>Eu te amo ❤️</h2>
 
         <p class="music">
-           <blockquote><i>Heaven is a place on Earth with you <br> - Lana Del Rey </i></blockquote>
+        <blockquote><i>Heaven is a place on Earth with you <br> - Lana Del Rey </i></blockquote>
         </p>
 
     </footer>
@@ -544,7 +674,7 @@
 
         setInterval(createHeart, 300);
 
-        /* SUBSTITUA PELO NOVO SCRIPT */
+
 
         const aniversario = new Date("2026-05-13");
 
@@ -569,6 +699,8 @@
             }
 
         }
+
+
 
         atualizarContador();
 
@@ -619,6 +751,17 @@
 
 
         atualizarContador();
+
+
+        function abrirVaral() {
+            const varal = document.getElementById("varalFotos");
+
+            if (varal.style.display === "block") {
+                varal.style.display = "none";
+            } else {
+                varal.style.display = "block";
+            }
+        }
     </script>
 
 </body>
